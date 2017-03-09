@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_transaction_input"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.nykidxxx.pfv2.InputPage"
+    android:background="#006699">
+
+    <TextView
+    android:text="Enter Transaction"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:id="@+id/enterTransaction"
+    android:textAlignment="center"
+    android:textSize="24sp"
+    android:gravity="center_vertical|center_horizontal"
+    android:background="@drawable/borders_all"
+    android:layout_weight="1"
+    android:textStyle="normal|bold"
+    android:textColor="#FFFFFF" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="90dp"
+        android:background="@drawable/borders_lrb">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:id="@+id/inputAmount"
+            android:inputType="numberDecimal"
+            android:paddingBottom="5dp"
+            android:paddingRight="5dp"
+            android:hint="$0.00"
+            android:textSize="70sp"
+            android:textStyle="bold|italic"
+            android:gravity="bottom|right"
+            android:background="@drawable/borders_lrb"
+            android:textColorHint="?attr/colorButtonNormal"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/borders_lrb"
+        android:layout_weight="1">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/inputMonth"
+            android:layout_weight="1"
+            android:hint="Month"
+            android:paddingBottom="5dp"
+            android:paddingRight="5dp"
+            android:gravity="bottom|right"
+            android:background="@drawable/borders_lrb"
+            android:textColorHint="?attr/colorButtonNormal"
+            android:textStyle="normal|italic"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/inputCategory"
+            android:layout_weight="1"
+            android:paddingBottom="5dp"
+            android:paddingRight="5dp"
+            android:hint="Category"
+            android:gravity="bottom|right"
+            android:background="@drawable/borders_rb"
+            android:textStyle="normal|italic"
+            android:textColor="#FFFFFF"
+            android:textColorHint="?attr/colorButtonNormal"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight=".5"
+        android:background="@drawable/borders_lrb">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/inputVendor"
+            android:layout_weight="1"
+            android:paddingBottom="5dp"
+            android:paddingRight="5dp"
+            android:hint="Vendor Name (Leave blank if possible)"
+            android:textSize="18sp"
+            android:gravity="bottom|right"
+            android:background="@drawable/borders_lrb"
+            android:textColorHint="?attr/colorButtonNormal"
+            android:textStyle="italic"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/borders_lrb"
+        android:layout_weight=".5">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/inputDetails"
+            android:layout_weight="1"
+            android:paddingBottom="5dp"
+            android:paddingRight="5dp"
+            android:hint="Details (Leave blank if possible)"
+            android:gravity="bottom|right"
+            android:background="@drawable/borders_lrb"
+            android:textStyle="normal|italic"
+            android:textColor="#FFFFFF"
+            android:textColorHint="?attr/colorButtonNormal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/borders_lrb"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <Button
+            android:text="History"
+            android:layout_height="70dp"
+            android:elevation="24dp"
+            android:id="@+id/gotohistoryButton"
+            android:onClick="historyButtonClicked"
+            android:layout_width="200dp"
+            android:background="#259302"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:text="Save"
+            android:id="@+id/saveButton"
+            android:elevation="24dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:onClick="saveButtonClicked"
+            android:layout_width="100dp"
+            android:layout_marginLeft="20dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
