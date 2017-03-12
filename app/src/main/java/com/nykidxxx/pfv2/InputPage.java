@@ -15,6 +15,7 @@ public class InputPage extends AppCompatActivity {
     EditText inputCategory;
     EditText inputMonth;
     DBHandlerNY dbHandler;
+    java.text.SimpleDateFormat sdf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class InputPage extends AppCompatActivity {
         inputMonth = (EditText)findViewById(R.id.inputMonth);
         dbHandler = new DBHandlerNY(this, null, null, 1);
 
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("MMMM");
+        sdf = new java.text.SimpleDateFormat("MMMM");
         inputMonth.setText(sdf.format(new Date()));
     }
 
@@ -39,7 +40,7 @@ public class InputPage extends AppCompatActivity {
         dbHandler.addTransaction(transaction);
         inputAmount.setText("");
         inputCategory.setText("");
-        inputMonth.setText("");
+        inputMonth.setText(sdf.format(new Date()));
     }
 
     public void historyButtonClicked(View view){

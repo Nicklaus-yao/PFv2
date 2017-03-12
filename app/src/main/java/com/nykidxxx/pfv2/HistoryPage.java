@@ -40,7 +40,7 @@ public class HistoryPage extends AppCompatActivity {
         int itemCount = dbHandler.countTransactions();
         Toast.makeText(HistoryPage.this, "Total Transaction Count is " + itemCount, Toast.LENGTH_SHORT).show();
 
-        for(int i=0; i<itemCount; i++){
+        for(int i=1; i<=itemCount; i++){
             temp = new HashMap<String, String>();
             temp.put(FIRST_COLUMN, dbHandler.getSpecificData(i, "_id"));
             temp.put(SECOND_COLUMN, dbHandler.getSpecificData(i, "amount"));

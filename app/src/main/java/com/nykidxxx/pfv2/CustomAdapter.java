@@ -9,11 +9,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class CustomAdapter extends BaseAdapter {
@@ -24,6 +28,7 @@ public class CustomAdapter extends BaseAdapter {
     TextView viewAmount;
     TextView viewCategory;
     TextView viewMonth;
+    Button buttonDelete;
 
     public CustomAdapter(Activity activity, ArrayList<HashMap<String, String>> list) {
         super();
@@ -33,25 +38,21 @@ public class CustomAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return list.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return list.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
         LayoutInflater inflater=activity.getLayoutInflater();
 
         if(convertView == null){
@@ -61,6 +62,7 @@ public class CustomAdapter extends BaseAdapter {
             viewAmount=(TextView) convertView.findViewById(R.id.viewAmount);
             viewCategory=(TextView) convertView.findViewById(R.id.viewCategory);
             viewMonth=(TextView) convertView.findViewById(R.id.viewMonth);
+            buttonDelete = (Button) convertView.findViewById(R.id.buttonDelete);
         }
 
         HashMap<String, String> map=list.get(position);
@@ -68,6 +70,15 @@ public class CustomAdapter extends BaseAdapter {
         viewAmount.setText(map.get(SECOND_COLUMN));
         viewCategory.setText(map.get(THIRD_COLUMN));
         viewMonth.setText(map.get(FOURTH_COLUMN));
+
+        buttonDelete.setTag(position);
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(CustomAdapter.this.activity, "Test", Toast.LENGTH_SHORT).show();
+                //list.remove(position);
+                //notifyDataSetChanged();
+            }
+        });
 
         return convertView;
     }
