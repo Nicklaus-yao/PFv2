@@ -40,6 +40,7 @@
             android:inputType="numberDecimal"
             android:paddingBottom="5dp"
             android:paddingRight="5dp"
+            android:layout_weight="1"
             android:hint="$0.00"
             android:textSize="70sp"
             android:textStyle="bold|italic"
@@ -101,6 +102,15 @@
         android:layout_weight=".5"
         android:background="@drawable/borders_lrb">
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/borders_lrb"
+        android:layout_weight=".5">
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -118,31 +128,6 @@
             android:textStyle="italic"
             android:textAllCaps="false"
             android:textColor="#FFFFFF" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/borders_lrb"
-        android:layout_weight=".5">
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/inputDetails"
-            android:layout_weight="1"
-            android:paddingBottom="5dp"
-            android:paddingRight="5dp"
-            android:hint="Leave this blank"
-            android:gravity="bottom|right"
-            android:background="@drawable/borders_lrb"
-            android:textStyle="normal|italic"
-            android:textColor="#FFFFFF"
-            android:textColorHint="?attr/colorButtonNormal" />
     </LinearLayout>
 
     <LinearLayout

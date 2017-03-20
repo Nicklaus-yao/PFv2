@@ -16,6 +16,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".HistoryPage"></activity>
+
+        <provider
+            android:authorities="com.nykidxxx.pfv2.TransactionProvider"
+            android:multiprocess="true"
+            android:name=".TransactionProvider"></provider>
+
     </application>
 
 </manifest>

@@ -1,32 +1,69 @@
 package com.nykidxxx.pfv2;
 //Created March 6th 2017
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.Toast;
 
-public class HistoryPage extends AppCompatActivity {
+import android.net.Uri;
+import android.app.LoaderManager.LoaderCallbacks;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
+import android.widget.CursorAdapter;
+import android.database.Cursor;
+import android.content.Loader;
 
+public class HistoryPage extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
+
+    CustomAdapter cAdapter;
     DBHandlerNY dbHandler;
     ListView listviewHistory;
+    String mCursorFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history_page);
 
+        setContentView(R.layout.activity_history_page);
         dbHandler = new DBHandlerNY(this, null, null, 1);
-        SQLiteDatabase db = dbHandler.getWritableDatabase();
-        Cursor itemCursor = db.rawQuery("SELECT * FROM transactions", null);
 
         listviewHistory = (ListView)findViewById(R.id.listviewHistory);
 
-        CustomAdapter cAdapter = new CustomAdapter(this, itemCursor, 0);
+        cAdapter = new CustomAdapter(this, null, 0);
         listviewHistory.setAdapter(cAdapter);
+
+        getLoaderManager().initLoader(0, null, this);
 
     }
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        String[] projection = { DBHandlerNY.COLUMN_ID,
+                                DBHandlerNY.COLUMN_AMOUNT,
+                                DBHandlerNY.COLUMN_CATEGORY,
+                                DBHandlerNY.COLUMN_MONTH };
+        CursorLoader cLoader = new CursorLoader(this, TransactionProvider.CONTENT_URI, projection, null, null, null);
+        return cLoader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cData) {
+        cAdapter.swapCursor(cData);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        cAdapter.swapCursor(null);
+    }
 }
+
+
+
+
+
+
+
+
+
+

@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
 import android.content.Context;
 import android.content.ContentValues;
+import android.support.v7.widget.ScrollingTabContainerView;
 
 public class DBHandlerNY extends SQLiteOpenHelper {
 
@@ -16,6 +17,7 @@ public class DBHandlerNY extends SQLiteOpenHelper {
     public static final String COLUMN_AMOUNT = "amount";
     public static final String COLUMN_CATEGORY = "category";
     public static final String COLUMN_MONTH = "month";
+    private SQLiteDatabase mDB;
 
     public DBHandlerNY(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -51,10 +53,16 @@ public class DBHandlerNY extends SQLiteOpenHelper {
     }
 
     //Delete a row from the database
-    public void deleteTransaction (int _id){
-        SQLiteDatabase db = getWritableDatabase();//TODO: Do this in a background thread
-        db.execSQL("DELETE FROM" + TABLE_TRANSACTIONS +
-                " WHERE " + COLUMN_ID + "=" + _id);
+    public int deleteTransaction (String _id){
+        SQLiteDatabase db = getWritableDatabase();
+        return db.delete(TABLE_TRANSACTIONS, COLUMN_ID + "=" + _id, null);
+    }
+
+    //Return a cursor with all data
+    public Cursor createCursor() {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor itemCursor = db.rawQuery("SELECT * FROM " + TABLE_TRANSACTIONS, null);
+        return itemCursor;
     }
 
 //TODO: Temporary code to test with, come back and make a proper display using custom list rows
@@ -137,7 +145,6 @@ public class DBHandlerNY extends SQLiteOpenHelper {
         db.close();
         return specificData;
     }
-
 
 }
 
