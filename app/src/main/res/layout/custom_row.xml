@@ -42,11 +42,14 @@
         android:layout_width="180dp" />
 
     <Button
-        android:text="X"
         android:id="@+id/buttonDelete"
-        android:layout_weight="0.50"
-        android:textSize="10sp"
+        android:textSize="18sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_weight=".5"
+        android:background="#006699"
+        android:textColor="#FFF"
+        android:text="X"
+        android:textStyle="normal|bold" />
 
 </LinearLayout>

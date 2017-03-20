@@ -3,6 +3,8 @@ package com.nykidxxx.pfv2;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import android.net.Uri;
@@ -19,6 +21,7 @@ public class HistoryPage extends AppCompatActivity implements LoaderManager.Load
     CustomAdapter cAdapter;
     DBHandlerNY dbHandler;
     ListView listviewHistory;
+    Button buttonGoBack;
     String mCursorFilter;
 
     @Override
@@ -29,12 +32,18 @@ public class HistoryPage extends AppCompatActivity implements LoaderManager.Load
         dbHandler = new DBHandlerNY(this, null, null, 1);
 
         listviewHistory = (ListView)findViewById(R.id.listviewHistory);
-
         cAdapter = new CustomAdapter(this, null, 0);
         listviewHistory.setAdapter(cAdapter);
 
         getLoaderManager().initLoader(0, null, this);
 
+        buttonGoBack = (Button)findViewById(R.id.buttonGoBack);
+        buttonGoBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

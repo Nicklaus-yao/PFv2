@@ -59,39 +59,11 @@
         android:background="@drawable/borders_lrb"
         android:layout_weight="1">
 
-        <EditText
-            android:layout_width="wrap_content"
+        <Spinner
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:ems="10"
-            android:id="@+id/inputMonth"
-            android:layout_weight="1"
-            android:hint="Month"
-            android:paddingBottom="5dp"
-            android:paddingRight="5dp"
-            android:gravity="bottom|right"
-            android:background="@drawable/borders_lrb"
-            android:textColorHint="?attr/colorButtonNormal"
-            android:textStyle="normal|italic"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp"
-            android:inputType="text" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/inputCategory"
-            android:layout_weight="1"
-            android:paddingBottom="5dp"
-            android:paddingRight="5dp"
-            android:hint="Category"
-            android:gravity="bottom|right"
-            android:background="@drawable/borders_rb"
-            android:textStyle="normal|italic"
-            android:textColor="#FFFFFF"
-            android:textColorHint="?attr/colorButtonNormal"
-            android:textSize="30sp" />
+            android:id="@+id/spinCategories"
+            android:layout_weight="1" />
 
     </LinearLayout>
 
@@ -102,6 +74,44 @@
         android:layout_weight=".5"
         android:background="@drawable/borders_lrb">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonLastMonth"
+            android:layout_weight=".25"
+            android:layout_margin="0dp"
+            android:background="@drawable/borders_lb"
+            android:textColor="#FFF"
+            android:text="&lt;"
+            android:textSize="30sp"
+            android:onClick="buttonLastMonthClicked" />
+
+        <TextView
+            android:text="Month"
+            android:id="@+id/inputMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:layout_weight="1"
+            android:paddingBottom="5dp"
+            android:paddingRight="5dp"
+            android:background="@drawable/borders_lrb"
+            android:textColorHint="?attr/colorButtonNormal"
+            android:textStyle="normal|italic"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:gravity="center_vertical|center_horizontal" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonNextMonth"
+            android:layout_weight=".25"
+            android:background="@drawable/borders_rb"
+            android:text="&gt;"
+            android:textColor="#FFF"
+            android:textSize="30sp"
+            android:onClick="buttonNextMonthClicked" />
     </LinearLayout>
 
     <LinearLayout
@@ -111,23 +121,6 @@
         android:background="@drawable/borders_lrb"
         android:layout_weight=".5">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/inputVendor"
-            android:layout_weight="1"
-            android:paddingBottom="5dp"
-            android:paddingRight="5dp"
-            android:hint="Leave this blank"
-            android:textSize="18sp"
-            android:gravity="bottom|right"
-            android:background="@drawable/borders_lrb"
-            android:textColorHint="?attr/colorButtonNormal"
-            android:textStyle="italic"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF" />
     </LinearLayout>
 
     <LinearLayout
@@ -142,19 +135,19 @@
             android:text="History"
             android:layout_height="70dp"
             android:elevation="24dp"
-            android:id="@+id/gotohistoryButton"
-            android:onClick="historyButtonClicked"
+            android:id="@+id/buttonGoToHistory"
+            android:onClick="buttonGoToHistoryClicked"
             android:layout_width="200dp"
             android:background="#259302"
             android:textColor="#FFFFFF" />
 
         <Button
             android:text="Save"
-            android:id="@+id/saveButton"
+            android:id="@+id/buttonSaveInput"
             android:elevation="24dp"
             android:layout_height="50dp"
             android:gravity="center"
-            android:onClick="saveButtonClicked"
+            android:onClick="buttonSaveInputClicked"
             android:layout_width="100dp"
             android:layout_marginLeft="20dp" />
 

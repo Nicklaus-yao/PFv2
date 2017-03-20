@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categories">
+        <item>Food</item>
+        <item>Unnecessary Crap</item>
+        <item>Living Expenses</item>
+        <item>Ur anus</item>
+    </string-array>
+</resources>
