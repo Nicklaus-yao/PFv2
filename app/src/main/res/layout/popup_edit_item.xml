@@ -10,20 +10,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="com.nykidxxx.pfv2.InputPage"
-    android:background="#006699">
+    android:background="#003366">
 
     <TextView
-    android:text="Enter Transaction"
-    android:layout_width="match_parent"
-    android:layout_height="55dp"
-    android:id="@+id/enterTransaction"
-    android:textAlignment="center"
-    android:textSize="24sp"
-    android:gravity="center_vertical|center_horizontal"
-    android:background="@drawable/borders_all"
-    android:layout_weight="1"
-    android:textStyle="normal|bold"
-    android:textColor="#FFFFFF" />
+        android:id="@+id/enterTransaction"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_weight="1"
+        android:background="@drawable/borders_all"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Edit Transaction"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -33,22 +33,22 @@
         android:background="@drawable/borders_lrb">
 
         <EditText
+            android:id="@+id/inputAmount"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/borders_lrb"
             android:ems="10"
-            android:id="@+id/inputAmount"
+            android:gravity="bottom|right"
+            android:hint="$0.00"
             android:inputType="numberDecimal"
             android:paddingBottom="5dp"
             android:paddingRight="5dp"
-            android:layout_weight="1"
-            android:hint="$0.00"
-            android:textSize="70sp"
-            android:textStyle="bold|italic"
-            android:gravity="bottom|right"
-            android:background="@drawable/borders_lrb"
-            android:textColorHint="?attr/colorButtonNormal"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textColorHint="?attr/colorButtonNormal"
+            android:textSize="70sp"
+            android:textStyle="bold|italic" />
 
     </LinearLayout>
 
@@ -88,20 +88,20 @@
             android:onClick="buttonLastMonthClicked" />
 
         <TextView
-            android:text="Month"
             android:id="@+id/inputMonth"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:ems="10"
             android:layout_weight="1"
+            android:background="@drawable/borders_lrb"
+            android:ems="10"
+            android:gravity="center_vertical|center_horizontal"
             android:paddingBottom="5dp"
             android:paddingRight="5dp"
-            android:background="@drawable/borders_lrb"
-            android:textColorHint="?attr/colorButtonNormal"
-            android:textStyle="normal|italic"
+            android:text="Month"
             android:textColor="#FFFFFF"
+            android:textColorHint="?attr/colorButtonNormal"
             android:textSize="30sp"
-            android:gravity="center_vertical|center_horizontal" />
+            android:textStyle="normal|italic" />
 
         <Button
             android:layout_width="wrap_content"
@@ -118,29 +118,10 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/borders_lrb"
-        android:layout_weight=".5">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@drawable/borders_lrb"
         android:gravity="center"
         android:layout_weight="1">
-
-        <Button
-            android:text="History"
-            android:layout_height="70dp"
-            android:elevation="24dp"
-            android:id="@+id/buttonGoToHistory"
-            android:onClick="buttonGoToHistoryClicked"
-            android:layout_width="200dp"
-            android:background="#259302"
-            android:textColor="#FFFFFF" />
 
         <Button
             android:text="Save"

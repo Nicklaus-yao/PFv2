@@ -65,33 +65,6 @@ public class DBHandlerNY extends SQLiteOpenHelper {
         return itemCursor;
     }
 
-//TODO: Temporary code to test with, come back and make a proper display using custom list rows
-    // Method to print the database as a string to allow us to display it
-    public String databaseToString(){
-        String dbString = "";
-        SQLiteDatabase db = getWritableDatabase();
-        String sqlQuery = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE 1 ";// + COLUMN_ID + "=" + _id;
-
-        Cursor c = db.rawQuery(sqlQuery, null);
-        c.moveToFirst();
-
-        while(!c.isAfterLast()){
-            if(c.getString(c.getColumnIndex("amount"))!=null){
-                dbString += c.getString(c.getColumnIndex("amount"));
-                dbString += " \t ";
-                dbString += c.getString(c.getColumnIndex("category"));
-                dbString += " \t ";
-                dbString += c.getString(c.getColumnIndex("month"));
-                dbString += "\n";
-            }
-            c.moveToNext();
-        }
-        c.close();
-
-        db.close();
-        return dbString;
-    }
-
     public int countTransactions(){
         int itemCount;
         SQLiteDatabase db = getWritableDatabase();
@@ -103,31 +76,7 @@ public class DBHandlerNY extends SQLiteOpenHelper {
         c.close();
 
         db.close();
-
         return itemCount;
-    }
-
-    // Method to return one row of data
-    public String returnRow(int _id){
-        String dbRow = "";
-        SQLiteDatabase db = getWritableDatabase();
-        String sqlQuery = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE " + COLUMN_ID + "=" + _id;
-
-        Cursor c = db.rawQuery(sqlQuery, null);
-        c.moveToFirst();
-
-        if(c.getString(c.getColumnIndex("amount"))!=null){
-            dbRow += c.getString(c.getColumnIndex("amount"));
-            dbRow += " \t ";
-            dbRow += c.getString(c.getColumnIndex("category"));
-            dbRow += " \t ";
-            dbRow += c.getString(c.getColumnIndex("month"));
-            dbRow += "\n";
-        }
-        c.close();
-
-        db.close();
-        return dbRow;
     }
 
     public String getSpecificData(int _id, String itemColumnName){
