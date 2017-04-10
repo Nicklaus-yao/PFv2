@@ -1,4 +1,4 @@
-package com.nykidxxx.pfv2;
+package com.nykidxxx.pfv2.ui;
 //Created March 6th 2017
 
 import android.content.Intent;
@@ -12,6 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.nykidxxx.pfv2.model.DBHandlerNY;
+import com.nykidxxx.pfv2.R;
+import com.nykidxxx.pfv2.model.Transactions;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -19,12 +24,15 @@ import java.util.GregorianCalendar;
 
 public class InputPage extends AppCompatActivity implements View.OnTouchListener{
 
+    Spinner inputPayeeSpinner;
     EditText inputAmount;
+    Spinner inputCategorySpinner;
     TextView inputMonth;
     Button buttonLastMonth;
     Button buttonNextMonth;
-    Spinner spinCategories;
+
     DBHandlerNY dbHandler;
+
     GregorianCalendar gCalendar;
     Date today;
     java.text.SimpleDateFormat sdf;
@@ -38,34 +46,51 @@ public class InputPage extends AppCompatActivity implements View.OnTouchListener
         inputMonth = (TextView)findViewById(R.id.inputMonth);
         buttonLastMonth = (Button) findViewById(R.id.buttonLastMonth);
         buttonNextMonth = (Button) findViewById(R.id.buttonNextMonth);
-        dbHandler = new DBHandlerNY(this, null, null, 1);
+        //Spinner for Payee
+        inputPayeeSpinner = (Spinner) findViewById(R.id.inputPayeeSpinner);
+        ArrayAdapter<CharSequence> adapterPayees = ArrayAdapter.createFromResource(
+                this, R.array.payees, R.layout.custom_pvf2_spinner_item);
+        adapterPayees.setDropDownViewResource(R.layout.custom_pvf2_spinner_dropdown_item);
+        inputPayeeSpinner.setAdapter(adapterPayees);
+        //Spinner for Category
+        inputCategorySpinner = (Spinner) findViewById(R.id.inputCategorySpinner);
+        ArrayAdapter<CharSequence> adapterCategories = ArrayAdapter.createFromResource(
+                this, R.array.categories, R.layout.custom_pvf2_spinner_item);
+        adapterCategories.setDropDownViewResource(R.layout.custom_pvf2_spinner_dropdown_item);
+        inputCategorySpinner.setAdapter(adapterCategories);
+
+        dbHandler = new DBHandlerNY(this, null, null, 2);
 
         gCalendar = new GregorianCalendar();
         today = gCalendar.getTime();
         sdf = new java.text.SimpleDateFormat("MMMM");
         inputMonth.setText(sdf.format(today));
 
+        //This piece of code closes the on-screen keyboard when tapped outside
+        //the related EditText field.
         findViewById(R.id.activity_transaction_input).setOnTouchListener(this);
         findViewById(R.id.inputMonth).setOnTouchListener(this);
 
-        //Spinner
-        spinCategories = (Spinner) findViewById(R.id.spinCategories);
-        ArrayAdapter<CharSequence> adapterCategories = ArrayAdapter.createFromResource(
-                this, R.array.categories, android.R.layout.simple_spinner_dropdown_item
-        );
-        adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinCategories.setAdapter(adapterCategories);
     }
 
     public void buttonSaveInputClicked(View view){
-        Transactions transaction = new Transactions(
-                inputAmount.getText().toString(),
-                spinCategories.getSelectedItem().toString(),
-                inputMonth.getText().toString()
-        );
-        dbHandler.addTransaction(transaction);
-        inputAmount.setText("");
-        inputMonth.setText(sdf.format(new Date()));
+        if((inputCategorySpinner.getSelectedItemPosition() == 0)
+                || (inputPayeeSpinner.getSelectedItemPosition() == 0)){
+            Toast.makeText(this, "ALERT! No category was selected.", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Transactions transaction = new Transactions(
+                    inputPayeeSpinner.getSelectedItem().toString(),
+                    inputAmount.getText().toString(),
+                    inputCategorySpinner.getSelectedItem().toString(),
+                    inputMonth.getText().toString()
+            );
+            dbHandler.addTransaction(transaction);
+            inputPayeeSpinner.setSelection(0);
+            inputAmount.setText("");
+            inputCategorySpinner.setSelection(0);
+            inputMonth.setText(sdf.format(new Date()));
+        }
     }
 
     public void buttonGoToHistoryClicked(View view){

@@ -9,24 +9,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".InputPage"
+            android:name=".ui.InputPage"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".HistoryPage"
-            android:screenOrientation="portrait">
-        </activity>
+            android:name=".ui.HistoryPage"
+            android:screenOrientation="portrait"></activity>
 
         <provider
-            android:authorities="com.nykidxxx.pfv2.TransactionProvider"
-            android:multiprocess="true"
-            android:name=".TransactionProvider"></provider>
+            android:name=".model.TransactionProvider"
+            android:authorities="com.nykidxxx.pfv2.model.TransactionProvider"
+            android:multiprocess="true" />
 
+        <activity android:name=".ui.EditPage"></activity>
     </application>
 
 </manifest>

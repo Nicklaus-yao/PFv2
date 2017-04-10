@@ -1,22 +1,20 @@
-package com.nykidxxx.pfv2;
+package com.nykidxxx.pfv2.model;
 // Created on 3/15/2017.
 
 import android.content.ContentProvider;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 //A Custom Content Provider to do the database operations.
 public class TransactionProvider extends ContentProvider {
 
-    private static final String AUTHORITY = "com.nykidxxx.pfv2.TransactionProvider";
+    private static final String AUTHORITY = "com.nykidxxx.pfv2.model.TransactionProvider";
 
     private static final String BASE_PATH_TABLE_NAME = "transactions";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_TABLE_NAME);
@@ -89,7 +87,7 @@ public class TransactionProvider extends ContentProvider {
                 id = uri.getLastPathSegment();
                 if (TextUtils.isEmpty(selection)){
                     rowsAffected = dbHandler.deleteTransaction(id);
-                    Toast.makeText(getContext(), "Deleted row with ID " + id, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Deleted item with ID# " + id, Toast.LENGTH_SHORT).show();
                 } else{
                     Toast.makeText(getContext(), "Warning: Selection not setup. Nothing deleted.", Toast.LENGTH_SHORT).show();
                 }

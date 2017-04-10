@@ -6,50 +6,50 @@
     android:background="#006699">
 
     <TextView
+        android:id="@+id/viewPayee"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="25"
         android:text="ID"
-        android:layout_width="50dp"
-        android:layout_height="match_parent"
-        android:id="@+id/viewID"
-        android:layout_weight="0.50"
-        android:layout_margin="5dp"
-        android:textColor="#FFF" />
+        android:textColor="#FFF"/>
 
     <TextView
-        android:text="Amount"
-        android:layout_height="match_parent"
         android:id="@+id/viewAmount"
-        android:layout_weight="2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="5dp"
-        android:textColor="#FFF"
-        android:layout_width="150dp" />
+        android:layout_weight="15"
+        android:text="Amount"
+        android:textColor="#FFF"/>
 
     <TextView
-        android:text="Category"
-        android:layout_height="match_parent"
         android:id="@+id/viewCategory"
-        android:layout_weight="2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="5dp"
-        android:textColor="#FFF"
-        android:layout_width="180dp" />
+        android:layout_weight="25"
+        android:text="Category"
+        android:textColor="#FFF"/>
 
     <TextView
-        android:text="Month"
-        android:layout_height="match_parent"
         android:id="@+id/viewMonth"
-        android:layout_weight="2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="5dp"
-        android:textColor="#FFF"
-        android:layout_width="180dp" />
+        android:layout_weight="25"
+        android:text="Month"
+        android:textColor="#FFF"/>
 
     <Button
-        android:id="@+id/buttonDelete"
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonEdit"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".5"
+        android:layout_weight="10"
         android:background="#006699"
+        android:text="[E]"
         android:textColor="#FFF"
-        android:text="X"
-        android:textStyle="normal|bold" />
+        android:textSize="18sp"
+        android:textStyle="normal|bold"/>
 
 </LinearLayout>

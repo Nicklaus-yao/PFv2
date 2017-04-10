@@ -1,9 +1,10 @@
-package com.nykidxxx.pfv2;
+package com.nykidxxx.pfv2.model;
 //Created March 6th 2017
 
 public class Transactions {
 
     private int _id;
+    private String _payee;
     private String _amount;
     private String _category;
     private String _month;
@@ -12,13 +13,18 @@ public class Transactions {
 
     }
 
-    public Transactions(String amount, String category, String month) {
+    public Transactions(String payee, String amount, String category, String month) {
+        this._payee = payee;
         this._month = month;
         this._category = category;
         this._amount = amount;
     }
 
     //----- Setters -----
+    public void set_payee(String _payee) {
+        this._payee = _payee;
+    }
+
     public void set_amount(String _amount) {
         this._amount = _amount;
     }
@@ -36,6 +42,10 @@ public class Transactions {
     }
 
     //----- Getters -----
+    public String get_payee() {
+        return _payee;
+    }
+
     public String get_amount() {
         return _amount;
     }

@@ -9,11 +9,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.nykidxxx.pfv2.InputPage"
+    tools:context="com.nykidxxx.pfv2.ui.InputPage"
     android:background="#003366">
 
     <TextView
-        android:id="@+id/enterTransaction"
+        android:id="@+id/editTransaction"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_weight="1"
@@ -33,7 +33,7 @@
         android:background="@drawable/borders_lrb">
 
         <EditText
-            android:id="@+id/inputAmount"
+            android:id="@+id/inputEditAmount"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -60,7 +60,7 @@
         android:layout_weight="1">
 
         <Spinner
-            android:id="@+id/spinCategories"
+            android:id="@+id/spinEditCategories"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -88,7 +88,7 @@
             android:onClick="buttonLastMonthClicked" />
 
         <TextView
-            android:id="@+id/inputMonth"
+            android:id="@+id/inputEditMonth"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"

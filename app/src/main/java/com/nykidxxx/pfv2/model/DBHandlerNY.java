@@ -1,4 +1,4 @@
-package com.nykidxxx.pfv2;
+package com.nykidxxx.pfv2.model;
 //Created March 6th 2017
 
 import android.database.sqlite.SQLiteDatabase;
@@ -6,14 +6,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
 import android.content.Context;
 import android.content.ContentValues;
-import android.support.v7.widget.ScrollingTabContainerView;
 
 public class DBHandlerNY extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "transactions.db";
     public static final String TABLE_TRANSACTIONS = "transactions";
     public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_PAYEE = "payee";
     public static final String COLUMN_AMOUNT = "amount";
     public static final String COLUMN_CATEGORY = "category";
     public static final String COLUMN_MONTH = "month";
@@ -27,6 +27,7 @@ public class DBHandlerNY extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sqlQuery = "CREATE TABLE " + TABLE_TRANSACTIONS + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_PAYEE + " TEXT, " +
                 COLUMN_AMOUNT + " TEXT, " +
                 COLUMN_CATEGORY + " TEXT, " +
                 COLUMN_MONTH + " TEXT " +
@@ -43,6 +44,7 @@ public class DBHandlerNY extends SQLiteOpenHelper {
     //Add a new row of information into the database
     public void addTransaction(Transactions transaction){
         ContentValues cValues = new ContentValues();
+        cValues.put(COLUMN_PAYEE, transaction.get_payee());
         cValues.put(COLUMN_AMOUNT, transaction.get_amount());
         cValues.put(COLUMN_CATEGORY, transaction.get_category());
         cValues.put(COLUMN_MONTH, transaction.get_month());
