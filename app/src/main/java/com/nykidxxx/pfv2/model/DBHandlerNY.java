@@ -9,7 +9,7 @@ import android.content.ContentValues;
 
 public class DBHandlerNY extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "transactions.db";
     public static final String TABLE_TRANSACTIONS = "transactions";
     public static final String COLUMN_ID = "_id";
@@ -41,8 +41,23 @@ public class DBHandlerNY extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public int getMaxIdPlusOne() {
+        int maxId;
+
+        SQLiteDatabase db = getWritableDatabase();
+        String sqlQuery = "SELECT MAX(" + COLUMN_ID + ") FROM " + TABLE_TRANSACTIONS;
+
+        Cursor c = db.rawQuery(sqlQuery, null);
+        c.moveToFirst();
+        maxId = c.getInt(c.getColumnIndex("countColumn"));
+        c.close();
+
+        db.close();
+        return maxId;
+    }
+
     //Add a new row of information into the database
-    public void addTransaction(Transactions transaction){
+    public long addTransaction(Transactions transaction){
         ContentValues cValues = new ContentValues();
         cValues.put(COLUMN_PAYEE, transaction.get_payee());
         cValues.put(COLUMN_AMOUNT, transaction.get_amount());
@@ -50,12 +65,13 @@ public class DBHandlerNY extends SQLiteOpenHelper {
         cValues.put(COLUMN_MONTH, transaction.get_month());
 
         SQLiteDatabase db = getWritableDatabase();
-        db.insert(TABLE_TRANSACTIONS, null, cValues);
+        long a = db.insert(TABLE_TRANSACTIONS, null, cValues);
         db.close();
+        return a;
     }
 
     //Delete a row from the database
-    public int deleteTransaction (String _id){
+    public int deleteTransactionFromDB (String _id){
         SQLiteDatabase db = getWritableDatabase();
         return db.delete(TABLE_TRANSACTIONS, COLUMN_ID + "=" + _id, null);
     }

@@ -18,7 +18,7 @@
         android:layout_height="40dp"
         android:layout_weight="1"
         android:background="@drawable/borders_all"
-        android:gravity="center_vertical|center_horizontal"
+        android:gravity="center"
         android:text="New Item"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
@@ -32,9 +32,9 @@
         android:layout_height="10dp"
         android:layout_weight="1"
         android:background="@drawable/borders_lr"
-        android:gravity="left|center"
+        android:gravity="start|center"
         android:text="  This item is from the vendor,"
-        android:textColor="#FFF"
+        android:textColor="#AAFFFFFF"
         android:textSize="18sp"
         android:textStyle="italic"/>
 
@@ -51,9 +51,9 @@
         android:layout_height="10dp"
         android:layout_weight="1"
         android:background="@drawable/borders_lr"
-        android:gravity="left|center"
+        android:gravity="start|center_vertical"
         android:text="  for the sum of,"
-        android:textColor="#FFF"
+        android:textColor="#AAFFFFFF"
         android:textSize="18sp"
         android:textStyle="italic"/>
 
@@ -64,7 +64,7 @@
         android:layout_weight="1"
         android:background="@drawable/borders_lrb"
         android:ems="10"
-        android:gravity="bottom|right"
+        android:gravity="bottom|end"
         android:hint="$0.00"
         android:inputType="numberDecimal"
         android:paddingBottom="5dp"
@@ -73,7 +73,7 @@
         android:textColor="#FFFFFF"
         android:textColorHint="?attr/colorButtonNormal"
         android:textSize="30sp"
-        />
+        tools:ignore="RtlSymmetry"/>
 
     <TextView
         android:id="@+id/textView5"
@@ -81,9 +81,9 @@
         android:layout_height="10dp"
         android:layout_weight="1"
         android:background="@drawable/borders_lr"
-        android:gravity="left|center"
+        android:gravity="start|center_vertical"
         android:text="  in the category of,"
-        android:textColor="#FFF"
+        android:textColor="#AAFFFFFF"
         android:textSize="18sp"
         android:textStyle="italic"
         />
@@ -101,9 +101,9 @@
         android:layout_height="10dp"
         android:layout_weight="1"
         android:background="@drawable/borders_lr"
-        android:gravity="left|center"
+        android:gravity="start|center_vertical"
         android:text="  for the month of,"
-        android:textColor="#FFF"
+        android:textColor="#AAFFFFFF"
         android:textSize="18sp"
         android:textStyle="italic"
         />
@@ -120,18 +120,19 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="0dp"
-            android:layout_weight=".25"
+            android:layout_weight="30"
             android:background="@drawable/borders_lb"
             android:onClick="buttonLastMonthClicked"
             android:text="&lt;"
-            android:textColor="#FFF"
-            android:textSize="30sp"/>
+            android:textColor="#DDFFFFFF"
+            android:textSize="30sp"
+            android:typeface="monospace"/>
 
         <TextView
             android:id="@+id/inputMonth"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="200"
             android:background="@drawable/borders_b"
             android:ems="10"
             android:gravity="center_vertical|center_horizontal"
@@ -141,18 +142,21 @@
             android:textColor="#FFFFFF"
             android:textColorHint="?attr/colorButtonNormal"
             android:textSize="30sp"
-            android:textStyle="normal|italic"/>
+            android:textStyle="normal|italic"
+            tools:text="September"
+            tools:ignore="RtlSymmetry"/>
 
         <Button
             android:id="@+id/buttonNextMonth"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight=".25"
+            android:layout_weight="30"
             android:background="@drawable/borders_rb"
             android:onClick="buttonNextMonthClicked"
             android:text="&gt;"
-            android:textColor="#FFF"
-            android:textSize="30sp"/>
+            android:textColor="#DDFFFFFF"
+            android:textSize="30sp"
+            android:typeface="monospace"/>
     </LinearLayout>
 
     <LinearLayout
@@ -160,29 +164,54 @@
         android:layout_height="70dp"
         android:layout_weight="1"
         android:background="@drawable/borders_lrb"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/buttonGoToHistory"
+        <RelativeLayout
             android:layout_width="200dp"
-            android:layout_height="70dp"
-            android:background="#009933"
-            android:elevation="24dp"
-            android:onClick="buttonGoToHistoryClicked"
-            android:text="History"
-            android:textColor="#FFFFFF"/>
-
-        <Button
-            android:id="@+id/buttonSaveInput"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:elevation="24dp"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:onClick="buttonSaveInputClicked"
-            android:text="Save"/>
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/buttonGoToCharts"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="#005533"
+                android:text="Overview"
+                android:textColor="#FFFFFF"/>
+
+            <Button
+                android:id="@+id/buttonGoToHistory"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_alignLeft="@+id/buttonGoToCharts"
+                android:layout_alignStart="@+id/buttonGoToCharts"
+                android:layout_below="@+id/buttonGoToCharts"
+
+                android:background="#009933"
+                android:onClick="buttonGoToHistoryClicked"
+                android:text="History"
+                android:textColor="#FFFFFF"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/buttonSaveInput"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:onClick="buttonSaveInputClicked"
+                android:text="Save"/>
+        </RelativeLayout>
 
     </LinearLayout>
 

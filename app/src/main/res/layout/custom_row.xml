@@ -1,55 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#006699">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#006699"
+    android:orientation="horizontal"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
 
     <TextView
         android:id="@+id/viewPayee"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:layout_weight="25"
-        android:text="ID"
-        android:textColor="#FFF"/>
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="Payee"
+        android:textColor="#FFF"
+        android:textSize="18sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:id="@+id/viewAmount"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:layout_weight="15"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:text="Amount"
-        android:textColor="#FFF"/>
+        android:textColor="#FFF"
+        android:textSize="18sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/viewMonth"
+        android:layout_alignStart="@+id/viewMonth"/>
 
     <TextView
         android:id="@+id/viewCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:layout_weight="25"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/viewPayee"
+        android:layout_marginBottom="5dp"
+        android:gravity="center_vertical"
         android:text="Category"
-        android:textColor="#FFF"/>
+        android:textColor="#DDFFFFFF"/>
 
     <TextView
         android:id="@+id/viewMonth"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp"
-        android:layout_weight="25"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/viewCategory"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/viewCategory"
+        android:layout_toRightOf="@+id/viewCategory"
+        android:gravity="center_vertical"
         android:text="Month"
-        android:textColor="#FFF"/>
+        android:textColor="#DDFFFFFF"/>
 
     <Button
         android:id="@+id/buttonEdit"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="10"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:background="#006699"
-        android:text="[E]"
-        android:textColor="#FFF"
-        android:textSize="18sp"
-        android:textStyle="normal|bold"/>
+        android:gravity="center"
+        android:text="[EDIT]"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"/>
 
-</LinearLayout>
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.nykidxxx.pfv2.ui;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,10 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nykidxxx.pfv2.Adapters.CustomAdapter;
 import com.nykidxxx.pfv2.R;
 import com.nykidxxx.pfv2.model.DBHandlerNY;
+import com.nykidxxx.pfv2.model.TransactionProvider;
+
+import static com.nykidxxx.pfv2.model.DBHandlerNY.DATABASE_VERSION;
 
 public class EditPage extends AppCompatActivity {
 
@@ -31,7 +36,7 @@ public class EditPage extends AppCompatActivity {
         final String category = intent.getStringExtra(CustomAdapter.EXTRA_CATEGORY);
         final String month = intent.getStringExtra(CustomAdapter.EXTRA_MONTH);
 
-        db = new DBHandlerNY(this, null, null, 2);
+        db = new DBHandlerNY(this, null, null, DATABASE_VERSION);
 
         // Capture the layout's TextViews
         EditText inputEditAmount = (EditText) findViewById(R.id.inputEditAmount);
@@ -74,7 +79,13 @@ public class EditPage extends AppCompatActivity {
         final View.OnClickListener deleteListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.deleteTransaction(id);
+                ContentResolver cr = EditPage.this.getContentResolver();
+                int rowsDeleted = cr.delete(TransactionProvider
+                                .CONTENT_URI.buildUpon()
+                                .appendPath(id)
+                                .build(),null,null);
+                Toast.makeText(EditPage.this, "(Followup) Deleted " +
+                        rowsDeleted + " row in the database", Toast.LENGTH_SHORT).show();
                 finish();
             }
         };

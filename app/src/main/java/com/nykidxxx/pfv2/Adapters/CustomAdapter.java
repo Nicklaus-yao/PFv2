@@ -9,10 +9,13 @@ import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nykidxxx.pfv2.R;
 import com.nykidxxx.pfv2.model.DBHandlerNY;
 import com.nykidxxx.pfv2.ui.EditPage;
+
+import static com.nykidxxx.pfv2.model.DBHandlerNY.DATABASE_VERSION;
 
 public class CustomAdapter extends CursorAdapter {
 
@@ -41,9 +44,9 @@ public class CustomAdapter extends CursorAdapter {
         TextView viewMonth = (TextView) view.findViewById(R.id.viewMonth);
         Button buttonEdit = (Button) view.findViewById(R.id.buttonEdit);
 
-        db = new DBHandlerNY(context, null, null, 2);
+        db = new DBHandlerNY(context, null, null, DATABASE_VERSION);
 
-        final int id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
+        final String id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"))+"";
         final String payee = cursor.getString(cursor.getColumnIndexOrThrow("payee"));
         final String amount = cursor.getString(cursor.getColumnIndexOrThrow("amount"));
         final String category = cursor.getString(cursor.getColumnIndexOrThrow("category"));
@@ -57,6 +60,8 @@ public class CustomAdapter extends CursorAdapter {
         final View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(context, "Value of id is: " + id, Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(context, EditPage.class);
                 intent.putExtra(EXTRA_ID, id);
                 intent.putExtra(EXTRA_PAYEE, payee);

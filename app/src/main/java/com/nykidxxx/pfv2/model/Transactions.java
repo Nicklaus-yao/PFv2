@@ -1,6 +1,10 @@
 package com.nykidxxx.pfv2.model;
 //Created March 6th 2017
 
+import android.content.Context;
+
+import static com.nykidxxx.pfv2.model.DBHandlerNY.DATABASE_VERSION;
+
 public class Transactions {
 
     private int _id;
@@ -9,11 +13,15 @@ public class Transactions {
     private String _category;
     private String _month;
 
+    private Context context;
+    DBHandlerNY db = new DBHandlerNY(context, null, null, DATABASE_VERSION);
+
     public Transactions(){
 
     }
 
     public Transactions(String payee, String amount, String category, String month) {
+        //////this._id = db.getMaxIdPlusOne();
         this._payee = payee;
         this._month = month;
         this._category = category;

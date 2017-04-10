@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import static com.nykidxxx.pfv2.model.DBHandlerNY.DATABASE_VERSION;
+
 //A Custom Content Provider to do the database operations.
 public class TransactionProvider extends ContentProvider {
 
@@ -30,7 +32,7 @@ public class TransactionProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        dbHandler = new DBHandlerNY(getContext(), null, null, 1);
+        dbHandler = new DBHandlerNY(getContext(), null, null, DATABASE_VERSION);
         return true;
     }
 
@@ -86,7 +88,7 @@ public class TransactionProvider extends ContentProvider {
             case ITEM_ID:
                 id = uri.getLastPathSegment();
                 if (TextUtils.isEmpty(selection)){
-                    rowsAffected = dbHandler.deleteTransaction(id);
+                    rowsAffected = dbHandler.deleteTransactionFromDB(id);
                     Toast.makeText(getContext(), "Deleted item with ID# " + id, Toast.LENGTH_SHORT).show();
                 } else{
                     Toast.makeText(getContext(), "Warning: Selection not setup. Nothing deleted.", Toast.LENGTH_SHORT).show();

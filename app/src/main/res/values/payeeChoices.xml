@@ -2,10 +2,26 @@
 <resources>
     <string-array name="payees">
         <item>Select Payee</item>
-        <item>Utility</item>
-        <item>Auto</item>
-        <item>Credit Card</item>
-        <item>Savings</item>
-        <item>Life Insurance</item>
+        <item>Con Ed</item>
+        <item>Optimum</item>
+        <item>T-Mobile</item>
+        <item>TD Auto Finance</item>
+        <item>National Grid</item>
+        <item>Savings Account</item>
+        <item>Chase 7504</item>
+        <item>Chase 3748</item>
+        <item>At&amp;t 1401</item>
+        <item>Citi 7004</item>
+        <item>Citi 9926</item>
+        <item>New York Life - Dad</item>
+
+        <item>(JR)Con Ed</item>
+        <item>(JR)Verizon</item>
+        <item>(JR)Poland Spring</item>
+        <item>(JR)Garbage Pickup</item>
+
+        <item>(Ni)Freedom 4389</item>
+        <item>(Ni)Amazon 4561</item>
+
     </string-array>
 </resources>

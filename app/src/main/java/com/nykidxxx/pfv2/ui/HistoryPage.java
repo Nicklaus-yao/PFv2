@@ -17,6 +17,8 @@ import com.nykidxxx.pfv2.model.DBHandlerNY;
 import com.nykidxxx.pfv2.R;
 import com.nykidxxx.pfv2.model.TransactionProvider;
 
+import static com.nykidxxx.pfv2.model.DBHandlerNY.DATABASE_VERSION;
+
 public class HistoryPage extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
     CustomAdapter cAdapter;
@@ -29,7 +31,7 @@ public class HistoryPage extends AppCompatActivity implements LoaderManager.Load
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_history_page);
-        dbHandler = new DBHandlerNY(this, null, null, 1);
+        dbHandler = new DBHandlerNY(this, null, null, DATABASE_VERSION);
 
         listviewHistory = (ListView)findViewById(R.id.listviewHistory);
         cAdapter = new CustomAdapter(this, null, 0);

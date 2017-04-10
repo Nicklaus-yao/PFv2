@@ -22,6 +22,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import static com.nykidxxx.pfv2.model.DBHandlerNY.DATABASE_VERSION;
+
 public class InputPage extends AppCompatActivity implements View.OnTouchListener{
 
     Spinner inputPayeeSpinner;
@@ -59,7 +61,7 @@ public class InputPage extends AppCompatActivity implements View.OnTouchListener
         adapterCategories.setDropDownViewResource(R.layout.custom_pvf2_spinner_dropdown_item);
         inputCategorySpinner.setAdapter(adapterCategories);
 
-        dbHandler = new DBHandlerNY(this, null, null, 2);
+        dbHandler = new DBHandlerNY(this, null, null, DATABASE_VERSION);
 
         gCalendar = new GregorianCalendar();
         today = gCalendar.getTime();
@@ -85,12 +87,15 @@ public class InputPage extends AppCompatActivity implements View.OnTouchListener
                     inputCategorySpinner.getSelectedItem().toString(),
                     inputMonth.getText().toString()
             );
-            dbHandler.addTransaction(transaction);
+            long aac = dbHandler.addTransaction(transaction);
             inputPayeeSpinner.setSelection(0);
             inputAmount.setText("");
             inputCategorySpinner.setSelection(0);
             inputMonth.setText(sdf.format(new Date()));
+
+            Toast.makeText(InputPage.this, "Id of new item is: " + aac, Toast.LENGTH_SHORT).show();
         }
+
     }
 
     public void buttonGoToHistoryClicked(View view){
