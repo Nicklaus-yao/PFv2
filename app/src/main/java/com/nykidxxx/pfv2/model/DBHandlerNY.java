@@ -7,17 +7,32 @@ import android.database.Cursor;
 import android.content.Context;
 import android.content.ContentValues;
 
+import com.nykidxxx.pfv2.R;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class DBHandlerNY extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 3;
-    private static final String DATABASE_NAME = "transactions.db";
+    public static final int DATABASE_VERSION = 4;
+    private static final String DATABASE_NAME = "pvf2.db";
+
     public static final String TABLE_TRANSACTIONS = "transactions";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_PAYEE = "payee";
     public static final String COLUMN_AMOUNT = "amount";
     public static final String COLUMN_CATEGORY = "category";
     public static final String COLUMN_MONTH = "month";
-    private SQLiteDatabase mDB;
+
+    public static final String TABLE_OVERVIEW = "overview";
+    public static final String COLUMN_PMAMOUNT = "pma";
+    public static final String COLUMN_CMAMOUNT = "cma";
+    public static final String COLUMN_NMAMOUNT = "nma";
+
+    GregorianCalendar gCalendar;
+    Date today;
+    java.text.SimpleDateFormat sdf;
 
     public DBHandlerNY(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
@@ -25,35 +40,30 @@ public class DBHandlerNY extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sqlQuery = "CREATE TABLE " + TABLE_TRANSACTIONS + "(" +
+        String sqlQueryTransactions = "CREATE TABLE " + TABLE_TRANSACTIONS + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_PAYEE + " TEXT, " +
                 COLUMN_AMOUNT + " TEXT, " +
                 COLUMN_CATEGORY + " TEXT, " +
                 COLUMN_MONTH + " TEXT " +
                 ")";
-        db.execSQL(sqlQuery);
+        db.execSQL(sqlQueryTransactions);
+
+        String sqlQueryOverview = "CREATE TABLE " + TABLE_OVERVIEW + "(" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_PAYEE + " TEXT, " +
+                COLUMN_PMAMOUNT + " TEXT, " +
+                COLUMN_CMAMOUNT + " TEXT, " +
+                COLUMN_NMAMOUNT + " TEXT " +
+                ")";
+        db.execSQL(sqlQueryOverview);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TRANSACTIONS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_OVERVIEW);
         onCreate(db);
-    }
-
-    public int getMaxIdPlusOne() {
-        int maxId;
-
-        SQLiteDatabase db = getWritableDatabase();
-        String sqlQuery = "SELECT MAX(" + COLUMN_ID + ") FROM " + TABLE_TRANSACTIONS;
-
-        Cursor c = db.rawQuery(sqlQuery, null);
-        c.moveToFirst();
-        maxId = c.getInt(c.getColumnIndex("countColumn"));
-        c.close();
-
-        db.close();
-        return maxId;
     }
 
     //Add a new row of information into the database
@@ -68,6 +78,45 @@ public class DBHandlerNY extends SQLiteOpenHelper {
         long a = db.insert(TABLE_TRANSACTIONS, null, cValues);
         db.close();
         return a;
+    }
+
+    public void updateOverview(String mPayee, String pMonth, String cMonth, String nMonth){
+        String pmAmount = "--";
+        String cmAmount = "--";
+        String nmAmount = "--";
+
+        SQLiteDatabase db = getWritableDatabase();
+        String sqlQueryPM = "SELECT " + COLUMN_AMOUNT + " FROM " + TABLE_TRANSACTIONS +
+                " WHERE " + COLUMN_PAYEE + "=\"" + mPayee +
+                  "\" AND " + COLUMN_MONTH + "=\"" + pMonth + "\"";
+        String sqlQueryCM = "SELECT " + COLUMN_AMOUNT + " FROM " + TABLE_TRANSACTIONS +
+                " WHERE " + COLUMN_PAYEE + "=\"" + mPayee +
+                "\" AND " + COLUMN_MONTH + "=\"" + cMonth + "\"";
+        String sqlQueryNM = "SELECT " + COLUMN_AMOUNT + " FROM " + TABLE_TRANSACTIONS +
+                " WHERE " + COLUMN_PAYEE + "=\"" + mPayee +
+                "\" AND " + COLUMN_MONTH + "=\"" + nMonth + "\"";
+
+        Cursor cPM = db.rawQuery(sqlQueryPM, null);
+        if(cPM !=null && cPM.moveToFirst())
+            pmAmount = cPM.getString(cPM.getColumnIndex("amount"));
+        cPM.close();
+        Cursor cCM = db.rawQuery(sqlQueryCM, null);
+        if(cCM !=null && cCM.moveToFirst())
+            cmAmount = cCM.getString(cCM.getColumnIndex("amount"));
+        cCM.close();
+        Cursor cNM = db.rawQuery(sqlQueryNM, null);
+        if(cNM !=null && cNM.moveToFirst())
+            nmAmount = cNM.getString(cPM.getColumnIndex("amount"));
+        cNM.close();
+
+        ContentValues cValues = new ContentValues();
+        cValues.put(COLUMN_PMAMOUNT, pmAmount);
+        cValues.put(COLUMN_CMAMOUNT, cmAmount);
+        cValues.put(COLUMN_NMAMOUNT, nmAmount);
+
+        long a = db.update(TABLE_OVERVIEW, cValues, COLUMN_PAYEE + "=\"" + mPayee + "\"", null);
+
+        db.close();
     }
 
     //Delete a row from the database

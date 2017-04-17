@@ -2,7 +2,7 @@
 <resources>
     <string-array name="payees">
         <item>Select Payee</item>
-        <item>Con Ed</item>
+        <item>ConEd</item>
         <item>Optimum</item>
         <item>T-Mobile</item>
         <item>TD Auto Finance</item>

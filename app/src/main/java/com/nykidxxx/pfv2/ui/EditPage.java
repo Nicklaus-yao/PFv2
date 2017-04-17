@@ -12,7 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nykidxxx.pfv2.Adapters.CustomAdapter;
+import com.nykidxxx.pfv2.Adapters.CustomAdapterHistory;
 import com.nykidxxx.pfv2.R;
 import com.nykidxxx.pfv2.model.DBHandlerNY;
 import com.nykidxxx.pfv2.model.TransactionProvider;
@@ -30,11 +30,11 @@ public class EditPage extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         final Intent intent = getIntent();
-        final String id = intent.getStringExtra(CustomAdapter.EXTRA_ID);
-        final String payee = intent.getStringExtra(CustomAdapter.EXTRA_PAYEE);
-        final String amount = intent.getStringExtra(CustomAdapter.EXTRA_AMOUNT);
-        final String category = intent.getStringExtra(CustomAdapter.EXTRA_CATEGORY);
-        final String month = intent.getStringExtra(CustomAdapter.EXTRA_MONTH);
+        final String id = intent.getStringExtra(CustomAdapterHistory.EXTRA_ID);
+        final String payee = intent.getStringExtra(CustomAdapterHistory.EXTRA_PAYEE);
+        final String amount = intent.getStringExtra(CustomAdapterHistory.EXTRA_AMOUNT);
+        final String category = intent.getStringExtra(CustomAdapterHistory.EXTRA_CATEGORY);
+        final String month = intent.getStringExtra(CustomAdapterHistory.EXTRA_MONTH);
 
         db = new DBHandlerNY(this, null, null, DATABASE_VERSION);
 
@@ -81,7 +81,7 @@ public class EditPage extends AppCompatActivity {
             public void onClick(View v) {
                 ContentResolver cr = EditPage.this.getContentResolver();
                 int rowsDeleted = cr.delete(TransactionProvider
-                                .CONTENT_URI.buildUpon()
+                                .CONTENT_URI_T.buildUpon()
                                 .appendPath(id)
                                 .build(),null,null);
                 Toast.makeText(EditPage.this, "(Followup) Deleted " +

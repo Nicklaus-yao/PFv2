@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#006699"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+    >
+
+
+    <TextView
+        android:id="@+id/viewPayee"
+        android:layout_width="170dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:gravity="start|center_vertical"
+        android:text="New York Life - Dad"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/viewPrevMonthAmount"
+        android:layout_width="65dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/viewPayee"
+        android:layout_toRightOf="@+id/viewPayee"
+        android:background="#0077b3"
+        android:gravity="center"
+        android:text="--"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        />
+
+    <TextView
+        android:id="@+id/viewCurrentMonthAmount"
+        android:layout_width="74dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/viewPrevMonthAmount"
+        android:layout_toRightOf="@+id/viewPrevMonthAmount"
+        android:background="#0099e6"
+        android:gravity="center"
+        android:text="--"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/viewNextMonthAmount"
+        android:layout_width="65dp"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@id/viewCurrentMonthAmount"
+        android:layout_toEndOf="@+id/viewCurrentMonthAmount"
+        android:layout_toRightOf="@+id/viewCurrentMonthAmount"
+        android:background="#0077b3"
+        android:gravity="center"
+        android:text="--"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        />
+</RelativeLayout>

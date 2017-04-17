@@ -36,8 +36,11 @@ public class InputPage extends AppCompatActivity implements View.OnTouchListener
     DBHandlerNY dbHandler;
 
     GregorianCalendar gCalendar;
+    GregorianCalendar gCalendarO;
     Date today;
     java.text.SimpleDateFormat sdf;
+
+    String[] mPayeesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,8 @@ public class InputPage extends AppCompatActivity implements View.OnTouchListener
         findViewById(R.id.activity_transaction_input).setOnTouchListener(this);
         findViewById(R.id.inputMonth).setOnTouchListener(this);
 
+        mPayeesList = getResources().getStringArray(R.array.payees);
+
     }
 
     public void buttonSaveInputClicked(View view){
@@ -101,6 +106,24 @@ public class InputPage extends AppCompatActivity implements View.OnTouchListener
     public void buttonGoToHistoryClicked(View view){
         Intent intent = new Intent(this, HistoryPage.class);
         startActivity(intent);
+    }
+
+    public void buttonGoToOverviewClicked(View view){
+
+        gCalendarO = new GregorianCalendar();
+        String cMonth = sdf.format(gCalendarO.getTime());
+        gCalendarO.add(Calendar.MONTH, -1);
+        String pMonth = sdf.format(gCalendarO.getTime());
+        gCalendarO.add(Calendar.MONTH, 2);
+        String nMonth = sdf.format(gCalendarO.getTime());
+
+        for(int i=1; i<mPayeesList.length; i++){
+            dbHandler.updateOverview(mPayeesList[i], cMonth, pMonth, nMonth);
+        }
+
+        Intent intent = new Intent(this, OverviewPage.class);
+        startActivity(intent);
+
     }
 
     public boolean onTouch(View arg0, MotionEvent arg1) {

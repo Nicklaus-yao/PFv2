@@ -17,7 +17,7 @@ import com.nykidxxx.pfv2.ui.EditPage;
 
 import static com.nykidxxx.pfv2.model.DBHandlerNY.DATABASE_VERSION;
 
-public class CustomAdapter extends CursorAdapter {
+public class CustomAdapterHistory extends CursorAdapter {
 
     DBHandlerNY db;
     public static final String EXTRA_ID = "com.nykidxxx.pfv2.ID";
@@ -26,13 +26,13 @@ public class CustomAdapter extends CursorAdapter {
     public static final String EXTRA_CATEGORY = "com.nykidxxx.pfv2.CATEGORY";
     public static final String EXTRA_MONTH = "com.nykidxxx.pfv2.MONTH";
 
-    public CustomAdapter(Context context, Cursor c, int flags) {
+    public CustomAdapterHistory(Context context, Cursor c, int flags) {
         super(context, c, flags);
     }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(R.layout.custom_row, parent, false);
+        return LayoutInflater.from(context).inflate(R.layout.custom_row_history, parent, false);
     }
 
     @Override

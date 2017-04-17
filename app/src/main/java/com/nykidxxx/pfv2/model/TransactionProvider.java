@@ -12,20 +12,30 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import static com.nykidxxx.pfv2.model.DBHandlerNY.DATABASE_VERSION;
+import static com.nykidxxx.pfv2.model.DBHandlerNY.TABLE_OVERVIEW;
+import static com.nykidxxx.pfv2.model.DBHandlerNY.TABLE_TRANSACTIONS;
 
 //A Custom Content Provider to do the database operations.
 public class TransactionProvider extends ContentProvider {
 
     private static final String AUTHORITY = "com.nykidxxx.pfv2.model.TransactionProvider";
 
-    private static final String BASE_PATH_TABLE_NAME = "transactions";
-    public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_TABLE_NAME);
+    public static final String TRANSACTIONS_TABLE_NAME = "transactions";
+    public static final String OVERVIEW_TABLE_NAME = "overview";
 
-    public static final int ITEMS = 1;
-    public static final int ITEM_ID = 2;
+    public static final Uri CONTENT_URI_T = Uri.parse("content://" + AUTHORITY + "/" + TRANSACTIONS_TABLE_NAME);
+    public static final Uri CONTENT_URI_O = Uri.parse("content://" + AUTHORITY + "/" + OVERVIEW_TABLE_NAME);
+
+    public static final int T_ITEMS = 1;
+    public static final int T_ITEM_ID = 2;
+    public static final int O_ITEMS = 3;
+    public static final int O_ITEM_ID = 4;
+
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-    static { sURIMatcher.addURI(AUTHORITY, BASE_PATH_TABLE_NAME, ITEMS);
-             sURIMatcher.addURI(AUTHORITY, BASE_PATH_TABLE_NAME + "/#", ITEM_ID);
+    static { sURIMatcher.addURI(AUTHORITY, TABLE_TRANSACTIONS, T_ITEMS);
+             sURIMatcher.addURI(AUTHORITY, TABLE_TRANSACTIONS + "/#", T_ITEM_ID);
+             sURIMatcher.addURI(AUTHORITY, TABLE_OVERVIEW, O_ITEMS);
+             sURIMatcher.addURI(AUTHORITY, TABLE_OVERVIEW + "/#", O_ITEM_ID);
     }
     private DBHandlerNY dbHandler;
     //private SQLiteDatabase mDB;
@@ -49,18 +59,28 @@ public class TransactionProvider extends ContentProvider {
                         String sortOrder) {
 
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(DBHandlerNY.TABLE_TRANSACTIONS);
 
         int uriType = sURIMatcher.match(uri);
         switch (uriType) {
-            case ITEMS:
+            case T_ITEMS:
+                queryBuilder.setTables(DBHandlerNY.TABLE_TRANSACTIONS);
                 if (TextUtils.isEmpty(sortOrder)) sortOrder = "_id ASC";
                 break;
-            case ITEM_ID:
+            case T_ITEM_ID:
+                queryBuilder.setTables(DBHandlerNY.TABLE_TRANSACTIONS);
                 // no filter
                 queryBuilder.appendWhere(DBHandlerNY.COLUMN_ID + "="
                         + uri.getLastPathSegment());
                 //selection = selection + "_id = " + uri.getLastPathSegment();
+                break;
+            case O_ITEMS:
+                queryBuilder.setTables(DBHandlerNY.TABLE_OVERVIEW);
+                if (TextUtils.isEmpty(sortOrder)) sortOrder = "_id ASC";
+                break;
+            case O_ITEM_ID:
+                queryBuilder.setTables(DBHandlerNY.TABLE_OVERVIEW);
+                queryBuilder.appendWhere(DBHandlerNY.COLUMN_ID + "="
+                        + uri.getLastPathSegment());
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -82,10 +102,10 @@ public class TransactionProvider extends ContentProvider {
 
         int uriType = sURIMatcher.match(uri);
         switch (uriType) {
-            case ITEMS:
+            case T_ITEMS:
                 Toast.makeText(getContext(), "Warning: You have tried to delete the entire database!", Toast.LENGTH_SHORT).show();
                 break;
-            case ITEM_ID:
+            case T_ITEM_ID:
                 id = uri.getLastPathSegment();
                 if (TextUtils.isEmpty(selection)){
                     rowsAffected = dbHandler.deleteTransactionFromDB(id);
